@@ -5,28 +5,45 @@ const CartManager = require('../../components/CartManager');
 const manager = new CartManager();
 
 cartRouter.get("/", async (req, res) => {
-  const carts = manager.getAllCarts();
-  return res.send(carts);
+  try {
+    const carts = manager.getAllCarts();
+    return res.send(carts);
+  } catch (error) {
+    return res.status(500).json({
+      error: "Error al obtener los carritos",
+    });
+  }
 });
 
 cartRouter.get("/:cartId", async (req, res) => {
   const cartId = req.params.cartId;
 
-  const cart = manager.getCartById(cartId);
+  try {
+    const cart = manager.getCartById(cartId);
 
-  if (!cart) {
-    return res.status(404).json({
-      error: "Cart not found",
+    if (!cart) {
+      return res.status(404).json({
+        error: "Carrito no encontrado",
+      });
+    }
+
+    return res.send(cart);
+  } catch (error) {
+    return res.status(500).json({
+      error: "Error al obtener el carrito",
     });
   }
-
-  return res.send(cart);
 });
 
 cartRouter.post("/", (req, res) => {
-  const cart = manager.createCart();
-
-  return res.status(201).json(cart);
+  try {
+    const cart = manager.createCart();
+    return res.status(201).json(cart);
+  } catch (error) {
+    return res.status(500).json({
+      error: "Error al crear el carrito",
+    });
+  }
 });
 
 cartRouter.post("/:cartId/product/:productId", (req, res) => {
@@ -34,30 +51,35 @@ cartRouter.post("/:cartId/product/:productId", (req, res) => {
   const productId = req.params.productId;
   const quantity = req.body.quantity || 1;
 
-  const cart = manager.getCartById(cartId);
-  socket.emit('productAdded', { cartId, productId }); // Enviar una notificación de producto agregado
+  try {
+    const cart = manager.getCartById(cartId);
 
+    if (!cart) {
+      return res.status(404).json({
+        error: "Carrito no encontrado",
+      });
+    }
 
-  if (!cart) {
-    return res.status(404).json({
-      error: "Cart not found",
+    const existingProduct = cart.products.find((product) => product.id === productId);
+
+    if (existingProduct) {
+      existingProduct.quantity += quantity;
+    } else {
+      cart.products.push({ id: productId, quantity });
+    }
+
+    return res.json({
+      message: "Producto agregado al carrito correctamente",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      error: "Error al agregar el producto al carrito",
     });
   }
-
-  const existingProduct = cart.products.find((product) => product.id === productId);
-
-  if (existingProduct) {
-    existingProduct.quantity += quantity;
-  } else {
-    cart.products.push({ id: productId, quantity });
-  }
-
-  return res.json({
-    message: "Product added to cart successfully",
-  });
 });
 
 module.exports = cartRouter;
+
 
 
 

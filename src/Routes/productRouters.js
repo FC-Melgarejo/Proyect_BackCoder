@@ -22,8 +22,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-
-
 // Obtener todos los productos
 productRouter.get('/', async (req, res) => {
   try {
@@ -128,6 +126,7 @@ productRouter.delete("/:id", async (req, res) => {
 });
 
 module.exports = productRouter;
+
 
 
 

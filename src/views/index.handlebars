@@ -2,19 +2,12 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Real-Time Products</title>
+  <title>Catálogo de productos</title>
 </head>
 <body>
-  <h1>Real-Time Products</h1>
+  <h1>Catálogo de productos</h1>
+  <ul id="productList"></ul>
 
-  <form id="createProductForm" onsubmit="createProduct(event)">
-
-    <input type="text" name="title" placeholder="Título del producto" required>
-    <input type="text" name="description" placeholder="Descripción del producto" required>
-    <!-- Otros campos del formulario -->
-
-    <button type="submit">Crear producto</button>
-  </form>
 
   <ul>
     {{#each products}}
@@ -26,20 +19,14 @@
   <script>
     const socket = io();
 
-    const createProductForm = document.getElementById('createProductForm');
-    createProductForm.addEventListener('submit', (event) => {
-      event.preventDefault(); // Evita que se realice la petición HTTP por defecto
-
-      const formData = new FormData(createProductForm);
-      const productData = Object.fromEntries(formData.entries());
-
-      socket.emit('createProduct', productData); // Enviar los datos del producto a través de WebSockets
-    });
-
-    socket.on('productAdded', (data) => {
-      // Manejar la notificación de producto agregado y actualizar la lista de productos en la interfaz
-      // ...
+    socket.on('newProduct', (product) => {
+      const parsedProduct = JSON.parse(product);
+      const productList = document.querySelector('ul');
+      const newProductItem = document.createElement('li');
+      newProductItem.textContent = `${parsedProduct.title} - ${parsedProduct.description}`;
+      productList.appendChild(newProductItem);
     });
   </script>
 </body>
 </html>
+

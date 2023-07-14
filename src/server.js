@@ -5,16 +5,16 @@ const path = require('path');
 const hbs = exphbs.create();
 const socketIO = require('socket.io');
 const productRouter = require('./Routes/productRouters');
-const cartRouter = require('./Routes/CartRouters');
+const CartRouter = require('./Routes/CartRouters');
 const ProductManager = require('../components/ProductManager');
-const homeRouter = require('./Routes/homeRouter');
+const viewsRouter = require('./Routes/ViewsRouters');
 const realTimeProductRouter = require('./Routes/realTimeProductRouter');
 
 const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
 
-const manager = new ProductManager('../productos.json', io);
+const manager = new ProductManager('../productos.json');
 
 app.set('views', path.join(__dirname, 'views'));
 
@@ -26,49 +26,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Rutas
-app.use('/api/products', productRouter);
-app.use('/api/carts', cartRouter);
-app.use('/', homeRouter);
+app.use('/api/products', productRouter); // Ruta para las operaciones de productos
+app.use('/api/carts', CartRouter); // Ruta para las operaciones de carritos
+app.use('/', viewsRouter); // Ruta para las vistas
 
-app.use('/realtimeproduct', realTimeProductRouter);
-
-
-app.get('/', (req, res) => {
-  res.render('home'); // Renderiza la vista 'home.handlebars'
-});
-app.get('/realtimeproduct', (req, res) => {
-  // Aquí puedes realizar las operaciones necesarias para mostrar la página de realtimeproduct
-
-  // Por ejemplo, puedes renderizar un archivo HTML utilizando un motor de plantillas como Handlebars o EJS
-  res.render('realtimeproduct', { title: 'Página de realtimeproduct' });
-
-  // O puedes enviar una respuesta JSON con los datos necesarios
-  const data = {
-    title: 'Página de realtimeproduct',
-    message: 'Bienvenido a la página de realtimeproduct'
-  };
-  res.json(data);
-});
-app.get('/realtimeproducts', (req, res) => {
-  res.render('realTimeProducts'); // Renderiza la vista 'realTimeProducts.handlebars'
-});
-
-io.on('connection', (socket) => {
-  socket.on('createProduct', (productData) => {
-    const productId = manager.addProduct(productData);
-    io.emit('productAdded', { productId });
-  });
-
-  socket.on('deleteProduct', (productId) => {
-    manager.deleteProduct(productId);
-    io.emit('productDeleted', { productId });
-  });
-});
+// Resto del código del servidor...
 
 const port = 8080; // Puerto en el que se ejecutará el servidor HTTP
 server.listen(port, () => {
   console.log(`Servidor HTTP escuchando en el puerto ${port}`);
 });
+
 
 
 

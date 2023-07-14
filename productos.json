@@ -87,5 +87,27 @@
     "thumbnails": [
       "/images/Joggin.jpg"
     ]
+  },
+  {
+    "id": 10,
+    "title": "jean",
+    "description": "jean femenino",
+    "code": "RED234",
+    "price": "38",
+    "status": true,
+    "stock": 1,
+    "category": "jeans",
+    "thumbnails": "images (3).jpg"
+  },
+  {
+    "id": 11,
+    "title": "jean",
+    "description": "Jean Mujer",
+    "code": "FG360",
+    "price": "38",
+    "status": true,
+    "stock": 1,
+    "category": "jeans",
+    "thumbnails": "images (6).jpg"
   }
 ]
