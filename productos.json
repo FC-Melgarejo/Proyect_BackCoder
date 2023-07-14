@@ -1,0 +1,91 @@
+[
+  {
+    "id": 1,
+    "title": "Camiseta",
+    "description": "Camiseta de algodón",
+    "price": 20,
+    "thumbnail": "/images/camiseta.jpg",
+    "code": "C001",
+    "stock": 10
+  },
+  {
+    "id": 2,
+    "title": "Pantalón",
+    "description": "Pantalón deportivo",
+    "price": 30,
+    "thumbnail": "/images/pantalon.jpg",
+    "code": "P001",
+    "stock": 5
+  },
+  {
+    "id": 3,
+    "title": "Zapatillas",
+    "description": "Zapatillas deportivas",
+    "price": 50,
+    "thumbnail": "/images/zapatillas.jpg",
+    "code": "Z001",
+    "stock": 8
+  },
+  {
+    "id": 4,
+    "title": "Buzo con Capucha",
+    "description": "Buzo de algodon de algodón",
+    "price": 20,
+    "thumbnail": "/images/buso.jpg",
+    "code": "A001",
+    "stock": 10
+  },
+  {
+    "id": 5,
+    "title": "Buzo con Capucha",
+    "description": "Buzo de algodon de algodón",
+    "price": 20,
+    "thumbnail": "/images/buso.jpg",
+    "code": "B001",
+    "stock": 10
+  },
+  {
+    "id": 6,
+    "title": "Mangas Largas",
+    "description": "Mangas Largas termicas",
+    "price": 20,
+    "thumbnail": "/images/remera.jpg",
+    "code": "U001",
+    "stock": 10
+  },
+  {
+    "id": 7,
+    "title": "Vincha Runnig",
+    "description": "Vincha de Lycra",
+    "price": 20,
+    "thumbnail": "/images/vincha.jpg",
+    "code": "f001",
+    "stock": 10
+  },
+  {
+    "id": 8,
+    "title": "Pantalón",
+    "description": "Pantalón nieve",
+    "code": "RE001",
+    "price": 30,
+    "status": true,
+    "stock": 5,
+    "category": "Pantalon impermeable",
+    "thumbnails": [
+      "/images/pantalon.jpg"
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Joggin ",
+    "description": "Puro algodon",
+    "code": "LSD001",
+    "price": 20,
+    "status": true,
+    "stock": 10,
+    "category": "Joggins",
+    "thumbnails": [
+      "/images/Joggin.jpg"
+    ]
+  }
+]

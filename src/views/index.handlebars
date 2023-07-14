@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Real-Time Products</title>
+</head>
+<body>
+  <h1>Real-Time Products</h1>
+
+  <form id="createProductForm" onsubmit="createProduct(event)">
+
+    <input type="text" name="title" placeholder="Título del producto" required>
+    <input type="text" name="description" placeholder="Descripción del producto" required>
+    <!-- Otros campos del formulario -->
+
+    <button type="submit">Crear producto</button>
+  </form>
+
+  <ul>
+    {{#each products}}
+      <li>{{this.title}} - {{this.description}}</li>
+    {{/each}}
+  </ul>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+
+    const createProductForm = document.getElementById('createProductForm');
+    createProductForm.addEventListener('submit', (event) => {
+      event.preventDefault(); // Evita que se realice la petición HTTP por defecto
+
+      const formData = new FormData(createProductForm);
+      const productData = Object.fromEntries(formData.entries());
+
+      socket.emit('createProduct', productData); // Enviar los datos del producto a través de WebSockets
+    });
+
+    socket.on('productAdded', (data) => {
+      // Manejar la notificación de producto agregado y actualizar la lista de productos en la interfaz
+      // ...
+    });
+  </script>
+</body>
+</html>
