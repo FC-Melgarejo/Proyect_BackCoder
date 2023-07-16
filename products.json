@@ -109,5 +109,104 @@
     "stock": 1,
     "category": "jeans",
     "thumbnails": "images (6).jpg"
+  },
+  {
+    "id": 12,
+    "title": "Short",
+    "description": "Short corto",
+    "code": "gtr234",
+    "price": "4000",
+    "status": true,
+    "stock": 1,
+    "category": "Shorts",
+    "thumbnails": "images (7).jpg"
+  },
+  {
+    "id": 13,
+    "title": "cuellero",
+    "description": "cuelleros",
+    "code": "idc567",
+    "price": "300",
+    "status": true,
+    "stock": 1,
+    "category": "cuellero",
+    "thumbnails": "images (1).jpg"
+  },
+  {
+    "id": 14,
+    "title": "Pollera ",
+    "description": "pollera lycra",
+    "code": "JKL2345",
+    "price": "3500",
+    "status": true,
+    "stock": 1,
+    "category": "Polleras",
+    "thumbnails": "images.jpg"
+  },
+  {
+    "id": 15,
+    "title": "Guante Bike",
+    "description": "Guante corto",
+    "code": "LKM890",
+    "price": "500",
+    "status": true,
+    "stock": 1,
+    "category": "Guantes bike",
+    "thumbnails": "images (1).jpg"
+  },
+  {
+    "id": 16,
+    "title": "Polera termica",
+    "description": "Térmica ideal",
+    "code": "Poleras",
+    "price": "1500",
+    "status": true,
+    "stock": 1,
+    "category": "Poleras",
+    "thumbnails": "images (8).jpg"
+  },
+  {
+    "id": 17,
+    "title": "Toallita",
+    "description": "Toallitas absorventes",
+    "code": "BHU3457",
+    "price": "576",
+    "status": true,
+    "stock": 1,
+    "category": "Toallitas",
+    "thumbnails": ""
+  },
+  {
+    "id": 18,
+    "title": "Chupin",
+    "description": "Jean Mujer",
+    "code": "ZXC34509",
+    "price": "6000",
+    "status": true,
+    "stock": 1,
+    "category": "jeans",
+    "thumbnails": ""
+  },
+  {
+    "id": 19,
+    "title": "Solera",
+    "description": "Solera femenina",
+    "code": "BNMJ8967",
+    "price": "5600",
+    "status": true,
+    "stock": 1,
+    "category": "Soleras",
+    "thumbnails": ""
+  },
+  {
+    "id": 20,
+    "title": "Remeras",
+    "description": "Remera verano",
+    "code": "PQWE3410",
+    "price": "4500",
+    "status": true,
+    "stock": 1,
+    "category": "Remeras",
+    "thumbnails": ""
   }
 ]

@@ -53,3 +53,15 @@ function createProduct(event) {
   createProductForm.reset(); // Reinicia el formulario después de enviar los datos
 }
 
+
+    const socket = io();
+
+    socket.on('newProduct', (product) => {
+      const parsedProduct = JSON.parse(product);
+      const productList = document.getElementById('productList');
+      const newProductItem = document.createElement('li');
+      newProductItem.textContent = `${parsedProduct.id} - ${parsedProduct.title} - ${parsedProduct.price}`;
+      productList.appendChild(newProductItem);
+    });
+ 
+

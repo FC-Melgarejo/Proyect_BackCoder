@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Agregar producto</title>
-</head>
-<body>
+<div class="form-container">
+  <h1>Agregar producto</h1>
+ <div class="container"></div>
   <h1>Agregar producto</h1>
 
   <form action="/productos" method="POST">
-  <input type="hidden" name="status" value="true">
+    <input type="hidden" name="status" value="true">
 
     <label for="title">Título:</label>
     <input type="text" id="title" name="title" required><br>
@@ -30,9 +26,13 @@
 
     <button type="submit">Agregar producto</button>
   </form>
+  <!-- ... Resto del formulario ... -->
+</div>
+
+ 
    {{#if successMessage}}
     <p>{{successMessage}}</p>
   {{/if}}
-</body>
-</html>
+
+
 

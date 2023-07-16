@@ -1,8 +1,14 @@
 const express = require('express');
 const viewsRouter = express.Router();
 const ProductManager = require('../../components/ProductManager');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
 
 const manager = new ProductManager('../productos.json');
+
+// Configuración de multer para manejar la carga de imágenes
+const upload = multer({ dest: 'Public/uploads/' }); // Directorio donde se guardarán las imágenes
 
 // Ruta para la página de inicio
 viewsRouter.get('/', async (req, res) => {
@@ -23,8 +29,11 @@ viewsRouter.get('/index', (req, res) => {
 viewsRouter.get('/addProduct', (req, res) => {
   res.render('addProduct');
 });
-// Ruta para agregar un nuevo producto
-viewsRouter.post('/productos', async (req, res) => {
+
+// Ruta para agregar un nuevo producto con carga de imagen
+viewsRouter.post('/productos', upload.single('thumbnails'), async (req, res) => {
+  console.log('Información del archivo:', req.file);
+   console.log('Datos del formulario:', req.body);
   try {
     const product = {
       title: req.body.title,
@@ -32,8 +41,8 @@ viewsRouter.post('/productos', async (req, res) => {
       code: req.body.code,
       price: req.body.price,
       category: req.body.category,
-      thumbnails: req.body.thumbnails,
-      status: true  // Valor por defecto de status
+      thumbnails: req.file ? req.file.filename : '', // Nombre del archivo de la imagen cargada
+      status: true // Valor por defecto de status
     };
 
     const productId = await manager.addProduct(product);
@@ -46,7 +55,6 @@ viewsRouter.post('/productos', async (req, res) => {
   }
 });
 
-
-
 module.exports = viewsRouter;
+
 
