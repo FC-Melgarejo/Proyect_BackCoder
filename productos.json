@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "title": "Conjunto",
+    "description": "jean femenino",
+    "code": "idc567",
+    "price": "38",
+    "status": true,
+    "stock": 1,
+    "category": "jeans",
+    "thumbnails": ""
+  },
+  {
+    "id": 2,
+    "title": "Conjunto ",
+    "description": "Conjunto Running",
+    "code": "VHY784",
+    "price": "7800",
+    "status": true,
+    "stock": 1,
+    "category": "Conjunto",
+    "thumbnails": ""
+  },
+  {
+    "id": 3,
+    "title": "Remera Térmica Cool",
+    "description": "Remera térmica invierno",
+    "code": "LKI4309",
+    "price": "7900",
+    "status": true,
+    "stock": 1,
+    "category": "Remeras Mangas larga",
+    "thumbnails": ""
+  }
+]
