@@ -10,10 +10,7 @@ createProductForm.addEventListener('submit', async (event) => {
     price: formData.get('price'),
     stock: formData.get('stock'),
     category: formData.get('category'),
-    // Agrega aquí más campos según tus necesidades
-    // campo1: formData.get('campo1'),
-    // campo2: formData.get('campo2'),
-    // ...
+    
   };
 
   try {
@@ -27,11 +24,11 @@ createProductForm.addEventListener('submit', async (event) => {
 
     if (response.ok) {
       const data = await response.json();
-      console.log('Producto creado:', data.product);
+      console.log('Producto creado:', data.products);
       
       // Emitir un evento al servidor socket.io
       const socket = io(); // Conectar al servidor socket.io
-      socket.emit('createProduct', data.product); // Emitir el evento 'createProduct' con los datos del producto
+      socket.emit('createProduct', data.products); // Emitir el evento 'createProduct' con los datos del producto
     } else {
       console.error('Error al crear el producto:', response.statusText);
     }
@@ -63,5 +60,18 @@ function createProduct(event) {
       newProductItem.textContent = `${parsedProduct.id} - ${parsedProduct.title} - ${parsedProduct.price}`;
       productList.appendChild(newProductItem);
     });
+    // Después de esta línea, donde emites el evento 'newProduct'
+res.status(201).json({ message: 'Producto agregado exitosamente', product: newProduct });
+
+// Agrega lo siguiente para mostrar una notificación de SweetAlert
+Swal.fire({
+  icon: 'success',
+  title: '¡Éxito!',
+  text: 'El producto ha sido agregado exitosamente.',
+}).then(() => {
+  // Recarga la página después de mostrar la notificación
+  window.location.reload();
+});
+
  
 

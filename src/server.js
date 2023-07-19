@@ -1,46 +1,61 @@
 const express = require('express');
+const http = require('http');
+const socketIO = require('socket.io');
 const exphbs = require('express-handlebars');
 const path = require('path');
-const hbs = exphbs.create();
+const ProductManager = require('../components/ProductManager');
+const viewsRouter = require('./Routes/viewsRouter');
 const multer = require('multer');
-const fs = require('fs');
-
-
+const { generateId } = require('../components/Helpers');
 
 const app = express();
-const server = require('http').createServer(app);
-const io = require('socket.io')(server);
+const server = http.createServer(app);
+const io = socketIO(server);
 
-const productRouter = require('./Routes/productRouters');
-const CartRouter = require('./Routes/CartRouters');
-const ProductManager = require('../components/ProductManager');
-const viewsRouter = require('./Routes/ViewsRouters');
-const realTimeProductRouter = require('./Routes/realTimeProductRouter');
-
-const manager = new ProductManager('../productos.json');
-
-app.set('views', path.join(__dirname, 'views'));
-
-app.engine('handlebars', hbs.engine);
+// Configurar el motor de plantillas Handlebars
+app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
 // Configuración de multer para manejar la carga de imágenes
-const upload = multer({ dest: '/src/Public/uploads' }); // Directorio donde se guardarán las imágenes
+const upload = multer({ dest: 'Public/uploads/' }); // Directorio donde se guardarán las imágenes
 
-app.use(express.static('public'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// Crear una instancia de ProductManager y pasarla al ViewsRouter
+const manager = new ProductManager('./products.json');
 
-// Rutas
-app.use('/api/products', productRouter); // Ruta para las operaciones de productos
-app.use('/api/carts', CartRouter); // Ruta para las operaciones de carritos
-app.use('/', viewsRouter); // Ruta para las vistas
+// Agregar el viewsRouter como middleware
+app.use(express.static(path.join(__dirname, 'Public')));
 
+app.set('views', path.join(__dirname, 'views'));
+app.use('/', viewsRouter(io, manager, upload)); // Pasamos también el upload para manejar la carga de imágenes en el formulario
 
-const port = 8080; // Puerto en el que se ejecutará el servidor HTTP
-server.listen(port, () => {
-  console.log(`Servidor HTTP escuchando en el puerto ${port}`);
+// Escuchar el evento "connection" desde el cliente
+io.on('connection', (socket) => {
+  console.log('Cliente conectado');
+
+  socket.on('addProduct', (data) => {
+    try {
+      const productId = manager.addProduct(data);
+      const newProduct = manager.getProductById(productId);
+      io.emit('newProduct', JSON.stringify(newProduct));
+    } catch (error) {
+      console.log('Error al agregar el producto:', error.message);
+    }
+  });
+
+  socket.on('disconnect', () => {
+    console.log('Cliente desconectado');
+  });
 });
+
+// Iniciar el servidor y el socket.io
+const PORT = process.env.PORT || 8080;
+server.listen(PORT, () => {
+  console.log(`Servidor HTTP escuchando en el puerto ${PORT}`);
+});
+
+
+
+
 
 
 

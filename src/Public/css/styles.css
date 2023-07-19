@@ -1,59 +1,76 @@
-/* Estilos para el formulario */
-.form-container {
-  max-width: 400px;
-  margin: 0 auto;
+form {
+  background-color: white;
+  border-radius: 3px;
+  color: #999;
+  font-size: 0.8em;
   padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
+  margin: 0 auto;
+  width: 400px; /* Ajusta el ancho del formulario según tus preferencias */
 }
 
 input,
-button {
-  margin-bottom: 10px;
+textarea {
+  border: solid 1px #ccc;
+  padding: 10px;
+  width: 360px; /* Ajusta el ancho de los campos de entrada según tus preferencias */
+  margin-bottom: 10px; /* Agrega un pequeño espacio entre los campos */
 }
 
-button {
-  background-color: #007bff;
-  color: white;
+input[type="submit"] {
+  background-color: #18A383;
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  color: white;
   cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 3px;
 }
 
-button:hover {
-  background-color: #0056b3;
+input[type="submit"]:hover {
+  background-color: #128D67; /* Cambia el color al pasar el ratón sobre el botón */
 }
 
-/* Estilos para la tabla en index.handlebars */
+.center-content {
+  text-align: center;
+}
+
+
+
+
+/* Estilos para la tabla */
 table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 20px;
 }
 
 th, td {
-  border: 1px solid #ccc;
-  padding: 8px;
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
 }
 
 th {
   background-color: #f2f2f2;
-  text-align: left;
+  color: #333;
 }
 
-tr:nth-child(even) {
-  background-color: #f2f2f2;
+tr:hover {
+  background-color: #f5f5f5;
 }
+
+.btn-delete {
+  background-color: #ff6666;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.btn-delete:hover {
+  background-color: #ff4d4d;
+}
+
+
 
 

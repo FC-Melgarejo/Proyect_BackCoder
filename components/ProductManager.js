@@ -45,21 +45,21 @@ class ProductManager {
 
   generateId() {
     const lastProductId = this.products.length > 0 ? this.products[this.products.length - 1].id : 0;
-    return lastProductId + 1;
+    return lastProductId ;
   }
 
   // Resto de métodos de la clase...
 
   loadProducts() {
     try {
-      const data = fs.readFileSync(this.filePath, 'utf8');
-      this.products = JSON.parse(data);
+      const productsData = fs.readFileSync(this.filePath, 'utf8');
+      this.products = JSON.parse(productsData);
       console.log('Productos cargados correctamente:', this.products);
-    } catch (error) {
-      console.error('Error al cargar los productos:', error.message);
+    } catch (err) {
+      console.error('Error al cargar los productos:', err);
     }
   }
-
+  
   saveProducts() {
     try {
       const jsonProducts = JSON.stringify(this.products, null, 2);
@@ -77,6 +77,15 @@ module.exports = ProductManager;
 
 
 
+
+
+
+
+
+
+// notifyNewProduct(product) {
+//   io.emit('newProduct', JSON.stringify(product));
+// }
 
 
 

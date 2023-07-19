@@ -59,21 +59,14 @@ productRouter.post("/", upload.array('thumbnails', 5), async (req, res) => {
   try {
     const { title, description, code, price, stock, category } = req.body;
 
-    if (
-      !title ||
-      !description ||
-      !price ||
-      !code ||
-      !stock ||
-      !category
-    ) {
+    if (!title || !description || !price || !code || !stock || !category) {
       return res.status(400).json({ error: 'Todos los campos son obligatorios' });
     }
 
     const thumbnails = req.files.map(file => file.filename);
 
     const newProduct = {
-      id: generateId(),
+      id: generateId(), // Aquí usamos la función generateId() para obtener un nuevo ID único.
       title,
       description,
       code,
@@ -126,6 +119,7 @@ productRouter.delete("/:id", async (req, res) => {
 });
 
 module.exports = productRouter;
+
 
 
 

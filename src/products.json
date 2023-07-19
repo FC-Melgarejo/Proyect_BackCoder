@@ -105,5 +105,49 @@
     "thumbnail": "/images/nuevo_producto2.jpg",
     "code": "NP002",
     "stock": 20
+  },
+  {
+    "id": 11,
+    "title": "Jeans",
+    "description": "Jean Mujer",
+    "code": "JKL2345",
+    "price": "6700",
+    "status": true,
+    "stock": 1,
+    "category": "jeans",
+    "thumbnails": "98be6454ae5cd10b2b55f01da8eb09b6"
+  },
+  {
+    "id": 11,
+    "title": "Sueter",
+    "description": "Abrigo",
+    "code": "gtr234",
+    "price": "5600",
+    "status": true,
+    "stock": 1,
+    "category": "abrigo",
+    "thumbnails": "1a3f7fa4731b98f91dd3a27f73ff1d49"
+  },
+  {
+    "id": 11,
+    "title": "Buzo",
+    "description": "Liviano",
+    "code": "DFG234",
+    "price": "5460",
+    "status": true,
+    "stock": 1,
+    "category": "Buzos",
+    "thumbnails": "d10d15f4e96647793d6c9099bc032a6b"
+  },
+  {
+    "id": 11,
+    "title": "Camperita",
+    "description": "Cuero ecologico",
+    "code": "WER567",
+    "price": "8900",
+    "status": true,
+    "stock": 1,
+    "category": "Camperas",
+    "thumbnails": "3737650b491d72cff531c6ac37cd7114"
   }
 ]
