@@ -149,5 +149,71 @@
     "stock": 1,
     "category": "Camperas",
     "thumbnails": "3737650b491d72cff531c6ac37cd7114"
+  },
+  {
+    "id": 11,
+    "title": "Polera",
+    "description": "Polera Lycra",
+    "code": "GHYU678",
+    "price": "3800",
+    "status": true,
+    "stock": 1,
+    "category": "Poleras",
+    "thumbnails": "792dff9c5ba5d085638dc1113aea827a"
+  },
+  {
+    "id": 12,
+    "title": "funpo",
+    "description": "Jean Mujer",
+    "code": "FG360",
+    "price": "38",
+    "status": true,
+    "stock": 1,
+    "category": "jeans",
+    "thumbnails": "476e218577f35c015c88d5a29a5b2133"
+  },
+  {
+    "id": 13,
+    "title": "Pollers",
+    "description": "Jean Mujer",
+    "code": "FG360",
+    "price": "38",
+    "status": true,
+    "stock": 1,
+    "category": "jean",
+    "thumbnails": "4568aa9f0aa6e76bea941d8f5b2199f9.jpg"
+  },
+  {
+    "id": 14,
+    "title": "Remeras",
+    "description": "De estacion",
+    "code": "TYIO567",
+    "price": "3500",
+    "status": true,
+    "stock": 1,
+    "category": "Remeras",
+    "thumbnails": "b68080f77c02923695cbb76d3643e55c.jpg"
+  },
+  {
+    "id": 15,
+    "title": "Calza",
+    "description": "Jean Mujer",
+    "code": "HJK345",
+    "price": "9000",
+    "status": true,
+    "stock": 1,
+    "category": "jeans",
+    "thumbnails": "c078fb98717620af1d3760f7f4c8cb4c.jpg"
+  },
+  {
+    "id": 16,
+    "title": "Chupin",
+    "description": "Jean Mujer",
+    "code": "LPMN908",
+    "price": "6700",
+    "status": true,
+    "stock": 1,
+    "category": "jeans",
+    "thumbnails": "images (6)-1689856635028-727706366.jpg"
   }
 ]

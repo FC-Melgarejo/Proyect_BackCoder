@@ -47,4 +47,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+socket.on('productDeleted', (productId) => {
+  // Lógica para eliminar el producto de la tabla
+  const productRow = document.getElementById(`product-${productId}`);
+  if (productRow) {
+    productRow.remove();
+  }
+});
 

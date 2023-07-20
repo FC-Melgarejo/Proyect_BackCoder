@@ -30,3 +30,4 @@ createProductForm.addEventListener('submit', (event) => {
   socket.emit('createProduct', productData); // Enviar los datos del producto a través de WebSockets
 });
 
+

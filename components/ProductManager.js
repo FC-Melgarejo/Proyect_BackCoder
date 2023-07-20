@@ -40,15 +40,13 @@ class ProductManager {
   }
 
   getProductById(id) {
-    return this.products.find(product => product.id === id);
+    return this.products.find((product) => product.id === id);
   }
 
   generateId() {
     const lastProductId = this.products.length > 0 ? this.products[this.products.length - 1].id : 0;
-    return lastProductId ;
+    return lastProductId + 1;
   }
-
-  // Resto de métodos de la clase...
 
   loadProducts() {
     try {
@@ -59,7 +57,7 @@ class ProductManager {
       console.error('Error al cargar los productos:', err);
     }
   }
-  
+
   saveProducts() {
     try {
       const jsonProducts = JSON.stringify(this.products, null, 2);
@@ -69,9 +67,23 @@ class ProductManager {
       console.error('Error al guardar los productos:', error.message);
     }
   }
-}
+
+  deleteProduct(productId) {
+    const index = this.products.findIndex((product) => product.id === productId);
+    if (index !== -1) {
+      this.products.splice(index, 1);
+      console.log(this.products);
+      this.saveProducts();
+      console.log('Producto eliminado correctamente');
+      this.notifyProductDeleted(productId); // Llamada a la función para notificar y actualizar la tabla
+    } else {
+      console.error('No se encontró el producto con el ID especificado');
+    }
+  }
+}  
 
 module.exports = ProductManager;
+
 
 
 
