@@ -1,211 +1,5 @@
 [
   {
-    "id": 1,
-    "title": "Camiseta",
-    "description": "Camiseta de algodón",
-    "price": 20,
-    "thumbnail": "/images/camiseta.jpg",
-    "code": "C001",
-    "stock": 10
-  },
-  {
-    "id": 2,
-    "title": "Pantalón",
-    "description": "Pantalón deportivo",
-    "price": 30,
-    "thumbnail": "/images/pantalon.jpg",
-    "code": "P001",
-    "stock": 5
-  },
-  {
-    "id": 3,
-    "title": "Zapatillas",
-    "description": "Zapatillas deportivas",
-    "price": 50,
-    "thumbnail": "/images/zapatillas.jpg",
-    "code": "Z001",
-    "stock": 8
-  },
-  {
-    "id": 4,
-    "title": "Buzo con Capucha",
-    "description": "Buzo de algodon de algodón",
-    "price": 20,
-    "thumbnail": "/images/buso.jpg",
-    "code": "A001",
-    "stock": 10
-  },
-  {
-    "id": 5,
-    "title": "Buzo con Capucha",
-    "description": "Buzo de algodon de algodón",
-    "price": 20,
-    "thumbnail": "/images/buso.jpg",
-    "code": "B001",
-    "stock": 10
-  },
-  {
-    "id": 6,
-    "title": "Mangas Largas",
-    "description": "Mangas Largas termicas",
-    "price": 20,
-    "thumbnail": "/images/remera.jpg",
-    "code": "U001",
-    "stock": 10
-  },
-  {
-    "id": 7,
-    "title": "Vincha Runnig",
-    "description": "Vincha de Lycra",
-    "price": 20,
-    "thumbnail": "/images/vincha.jpg",
-    "code": "f001",
-    "stock": 10
-  },
-  {
-    "id": 8,
-    "title": "Pantalón",
-    "description": "Pantalón nieve",
-    "code": "RE001",
-    "price": 30,
-    "status": true,
-    "stock": 5,
-    "category": "Pantalon impermeable",
-    "thumbnails": [
-      "/images/pantalon.jpg"
-    ]
-  },
-  {
-    "id": 9,
-    "title": "Joggin ",
-    "description": "Puro algodon",
-    "code": "LSD001",
-    "price": 20,
-    "status": true,
-    "stock": 10,
-    "category": "Joggins",
-    "thumbnails": [
-      "/images/Joggin.jpg"
-    ]
-  },
-  {
-    "id": 10,
-    "title": "Nuevo Producto 1",
-    "description": "Descripción del Nuevo Producto 1",
-    "price": 50,
-    "thumbnail": "/images/nuevo_producto1.jpg",
-    "code": "NP001",
-    "stock": 15
-  },
-  {
-    "id": 11,
-    "title": "Nuevo Producto 2",
-    "description": "Descripción del Nuevo Producto 2",
-    "price": 40,
-    "thumbnail": "/images/nuevo_producto2.jpg",
-    "code": "NP002",
-    "stock": 20
-  },
-  {
-    "id": 11,
-    "title": "Jeans",
-    "description": "Jean Mujer",
-    "code": "JKL2345",
-    "price": "6700",
-    "status": true,
-    "stock": 1,
-    "category": "jeans",
-    "thumbnails": "98be6454ae5cd10b2b55f01da8eb09b6"
-  },
-  {
-    "id": 11,
-    "title": "Sueter",
-    "description": "Abrigo",
-    "code": "gtr234",
-    "price": "5600",
-    "status": true,
-    "stock": 1,
-    "category": "abrigo",
-    "thumbnails": "1a3f7fa4731b98f91dd3a27f73ff1d49"
-  },
-  {
-    "id": 11,
-    "title": "Buzo",
-    "description": "Liviano",
-    "code": "DFG234",
-    "price": "5460",
-    "status": true,
-    "stock": 1,
-    "category": "Buzos",
-    "thumbnails": "d10d15f4e96647793d6c9099bc032a6b"
-  },
-  {
-    "id": 11,
-    "title": "Camperita",
-    "description": "Cuero ecologico",
-    "code": "WER567",
-    "price": "8900",
-    "status": true,
-    "stock": 1,
-    "category": "Camperas",
-    "thumbnails": "3737650b491d72cff531c6ac37cd7114"
-  },
-  {
-    "id": 11,
-    "title": "Polera",
-    "description": "Polera Lycra",
-    "code": "GHYU678",
-    "price": "3800",
-    "status": true,
-    "stock": 1,
-    "category": "Poleras",
-    "thumbnails": "792dff9c5ba5d085638dc1113aea827a"
-  },
-  {
-    "id": 12,
-    "title": "funpo",
-    "description": "Jean Mujer",
-    "code": "FG360",
-    "price": "38",
-    "status": true,
-    "stock": 1,
-    "category": "jeans",
-    "thumbnails": "476e218577f35c015c88d5a29a5b2133"
-  },
-  {
-    "id": 13,
-    "title": "Pollers",
-    "description": "Jean Mujer",
-    "code": "FG360",
-    "price": "38",
-    "status": true,
-    "stock": 1,
-    "category": "jean",
-    "thumbnails": "4568aa9f0aa6e76bea941d8f5b2199f9.jpg"
-  },
-  {
-    "id": 14,
-    "title": "Remeras",
-    "description": "De estacion",
-    "code": "TYIO567",
-    "price": "3500",
-    "status": true,
-    "stock": 1,
-    "category": "Remeras",
-    "thumbnails": "b68080f77c02923695cbb76d3643e55c.jpg"
-  },
-  {
-    "id": 15,
-    "title": "Calza",
-    "description": "Jean Mujer",
-    "code": "HJK345",
-    "price": "9000",
-    "status": true,
-    "stock": 1,
-    "category": "jeans",
-    "thumbnails": "c078fb98717620af1d3760f7f4c8cb4c.jpg"
-  },
-  {
     "id": 16,
     "title": "Chupin",
     "description": "Jean Mujer",
@@ -215,5 +9,71 @@
     "stock": 1,
     "category": "jeans",
     "thumbnails": "images (6)-1689856635028-727706366.jpg"
+  },
+  {
+    "id": 17,
+    "title": "Mangas Largas",
+    "description": "Damas",
+    "code": "GFRT567",
+    "price": "5900",
+    "status": true,
+    "stock": 1,
+    "category": "Remeras",
+    "thumbnails": "images (8)-1689897119982-421872785.jpg"
+  },
+  {
+    "id": 18,
+    "title": "Camperita",
+    "description": "Campera de Cuero",
+    "code": "GHJI345",
+    "price": "37000",
+    "status": true,
+    "stock": 1,
+    "category": "Camperas",
+    "thumbnails": "images (7)-1689902899832-295445395.jpg"
+  },
+  {
+    "id": 19,
+    "title": "Pollera",
+    "description": "Jean Mujer",
+    "code": "KLOO498",
+    "price": "5000",
+    "status": true,
+    "stock": 1,
+    "category": "Polleras",
+    "thumbnails": "images (2)-1689905937114-610205753.jpg"
+  },
+  {
+    "id": 20,
+    "title": "Remera",
+    "description": "Remera de verano",
+    "code": "GHI8904",
+    "price": "3600",
+    "status": true,
+    "stock": 1,
+    "category": "Remeras",
+    "thumbnails": "images-1689933929078-313024965.jpg"
+  },
+  {
+    "id": 21,
+    "title": "Jean",
+    "description": "Jean femenino",
+    "code": "HUYT345",
+    "price": "7900",
+    "status": true,
+    "stock": 1,
+    "category": "Jeans",
+    "thumbnails": "images (3)-1689934551183-644246321.jpg"
+  },
+  {
+    "id": 22,
+    "title": "Buzo ",
+    "description": "Buzo Conjunto",
+    "code": "HUYT345",
+    "price": "12000",
+    "status": true,
+    "stock": 1,
+    "category": "Conjunto",
+    "thumbnails": "images (4)-1689934894136-522181830.jpg"
   }
 ]

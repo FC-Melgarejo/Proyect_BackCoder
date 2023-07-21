@@ -7,12 +7,18 @@ const ProductManager = require('../components/ProductManager');
 const multer = require('multer');
 const { generateId } = require('../components/Helpers');
 
+
 const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
 
+app.use(express.static('Public'));
+// Configura la carpeta de imágenes como estática
+app.use('/uploads', express.static(path.join(__dirname, 'ruta_a_la_carpeta_de_imagenes')));
+
+
 // Configuración de multer para manejar la carga de imágenes
-const upload = multer({ dest: 'Public/uploads/' }); // Directorio donde se guardarán las imágenes
+const upload = multer({ dest: '/src/Public/uploads' }); // Directorio donde se guardarán las imágenes
 
 // Crear una instancia de ProductManager y pasarla al ViewsRouter
 const manager = new ProductManager('./products.json');
@@ -20,7 +26,10 @@ const manager = new ProductManager('./products.json');
 // Configurar el motor de plantillas Handlebars
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
-
+app.get('/src/Public/app.js', (req, res) => {
+  res.type('application/javascript');
+  
+});
 // Importar el enrutador viewsRouter y pasar los argumentos (io, manager, upload)
 const viewsRouter = require('./Routes/viewsRouter');
 

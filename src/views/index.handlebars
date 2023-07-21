@@ -1,7 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>My App</title>
+  
+  <link rel="stylesheet" href="/css/styles.css">
 
+
+</head>
+<body>
   <h1>Catálogo de productos</h1>
 
-   <table>
+  <table>
     <tr>
       <th>Título</th>
       <th>Descripción</th>
@@ -14,19 +24,21 @@
       <td>{{this.title}}</td>
       <td>{{this.description}}</td>
       <td>{{this.price}}</td>
-       <td><img src="/uploads/{{this.thumbnails}}" alt="Thumbnail" style="width: 50px;"></td>
-    <td>{{this.code}}</td>
-    <td>
-
-   <td>
-
-  <button class="btn-delete" data-id="{{this.id}}">Eliminar</button>
-</td>
-
-
+      <td><img src="/uploads/{{this.thumbnails}}" alt="Thumbnail" style="width: 50px;"></td>
+      <td>{{this.code}}</td>
+      <td>
+        <button class="btn-delete" data-id="{{this.id}}">Eliminar</button>
+      </td>
     </tr>
     {{/each}}
   </table>
+
+</body>
+</html>
+
+
+
+
 
   
 

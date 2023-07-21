@@ -2,7 +2,6 @@ const express = require('express');
 const viewsRouter = express.Router();
 const multer = require('multer');
 const path = require('path');
-const fs = require('fs');
 
 // Importa el middleware de multer desde el archivo utils.js
 const uploader = require('../utils');
@@ -54,10 +53,28 @@ module.exports = (io, manager) => {
     }
   });
 
-  // Resto del código del enrutador...
+  // Ruta para eliminar un producto por su productId
+  viewsRouter.delete('/productos/:id', (req, res) => {
+    const productId = parseInt(req.params.id);
+
+    try {
+      // Eliminar el producto del ProductManager
+      manager.deleteProduct(productId);
+
+      // Emitir un evento a través de Socket.IO para notificar al cliente que el producto ha sido eliminado
+      io.emit('productDeleted', productId);
+
+      res.status(200).json({ message: 'Producto eliminado exitosamente.' });
+    } catch (error) {
+      console.error('Error al eliminar el producto:', error);
+      res.status(500).json({ error: 'Error al eliminar el producto.' });
+    }
+  });
+  
 
   // Devuelve el enrutador configurado
   return viewsRouter;
 };
+
 
 

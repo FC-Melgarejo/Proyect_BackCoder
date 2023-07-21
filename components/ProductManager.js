@@ -68,21 +68,30 @@ class ProductManager {
     }
   }
 
-  deleteProduct(productId) {
-    const index = this.products.findIndex((product) => product.id === productId);
-    if (index !== -1) {
-      this.products.splice(index, 1);
-      console.log(this.products);
-      this.saveProducts();
-      console.log('Producto eliminado correctamente');
-      this.notifyProductDeleted(productId); // Llamada a la función para notificar y actualizar la tabla
-    } else {
-      console.error('No se encontró el producto con el ID especificado');
+  async deleteProduct(productId) {
+    try {
+      // Buscar el producto en los datos JSON y eliminarlo
+      const updatedProducts = products.filter((product) => product.id !== productId);
+
+      // Guardar los productos actualizados de vuelta al archivo JSON
+      fs.writeFileSync('/json/file.json', JSON.stringify(updatedProducts, null, 2));
+
+      // Eliminar el archivo de imagen asociado de la carpeta "uploads"
+      const product = products.find((product) => product.id === productId);
+      if (product) {
+        fs.unlinkSync(`/uploads/folder/${product.thumbnails}`);
+      }
+
+      // Devolver un resultado exitoso o lanzar un error si algo sale mal
+      return true;
+    } catch (error) {
+      throw new Error('Error al eliminar el producto: ' + error.message);
     }
   }
-}  
+}
 
-module.exports = ProductManager;
+module.exports = ProductManager; 
+
 
 
 
