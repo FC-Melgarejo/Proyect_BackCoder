@@ -1,17 +1,15 @@
 const express = require('express');
 const viewsRouter = express.Router();
-const multer = require('multer');
-const path = require('path');
-
-// Importa el middleware de multer desde el archivo utils.js
+const { generateId } = require('../helpers');
 const uploader = require('../utils');
 
+
+
 module.exports = (io, manager) => {
-  // Ruta para la página de inicio
   viewsRouter.get('/', async (req, res) => {
     try {
       const products = await manager.getProducts();
-      res.render('Home', { products });
+      res.render('home', { products: [] });
     } catch (error) {
       res.status(500).json({ error: 'Error al obtener los productos' });
     }
@@ -24,57 +22,51 @@ module.exports = (io, manager) => {
 
   // Ruta para el formulario de carga de productos
   viewsRouter.get('/realTimeProduct', (req, res) => {
-    res.render('realTimeProduct');
+    res.render('realTimeProduct', { action: '/products.json' }); // Asegúrate de pasar la ruta correcta para el formulario
   });
 
-  // Ruta para agregar un nuevo producto con carga de imagen
-  viewsRouter.post('/productos', uploader.single('thumbnails'), async (req, res) => {
-    const thumbnailFileName = req.file.filename;
-    console.log('Información del archivo:', req.file);
-    console.log('Datos del formulario:', req.body);
-    try {
-      const product = {
-        title: req.body.title,
-        description: req.body.description,
-        code: req.body.code,
-        price: req.body.price,
-        category: req.body.category,
-        thumbnails: thumbnailFileName, // Nombre del archivo de la imagen cargada
-        status: true // Valor por defecto de status
-      };
-      const productId = await manager.addProduct(product);
-      console.log('Producto agregado correctamente:', productId);
+  viewsRouter.post('/products', uploader.single('thumbnails'), (req, res) => {
+    const productData = {
+      id: generateId(),
+      title: req.body.title,
+      description: req.body.description,
+      code: req.body.code,
+      price: req.body.price,
+      status: req.body.status === 'true',
+      stock: parseInt(req.body.stock),
+      category: req.body.category,
+      thumbnails: req.file ? req.file.path : null,
+    };
 
-      res.redirect('/index');
-      // Redirige a la página de inicio después de agregar el producto
-    } catch (error) {
-      console.log('Error al agregar el producto:', error.message);
-      res.status(500).json({ error: 'Error al agregar el producto' });
-    }
-  });
+    manager.addProduct(productData);
+     // Redireccionar al catálogo después de agregar el producto
+  res.redirect('/index');
 
-  // Ruta para eliminar un producto por su productId
-  viewsRouter.delete('/productos/:id', (req, res) => {
-    const productId = parseInt(req.params.id);
+    // Emitir evento de socket.io para notificar que se agregó un producto
+    io.emit('productAdded', 'Nuevo producto agregado');
 
-    try {
-      // Eliminar el producto del ProductManager
-      manager.deleteProduct(productId);
-
-      // Emitir un evento a través de Socket.IO para notificar al cliente que el producto ha sido eliminado
-      io.emit('productDeleted', productId);
-
-      res.status(200).json({ message: 'Producto eliminado exitosamente.' });
-    } catch (error) {
-      console.error('Error al eliminar el producto:', error);
-      res.status(500).json({ error: 'Error al eliminar el producto.' });
-    }
+    res.json(productData);
   });
   
 
-  // Devuelve el enrutador configurado
+  viewsRouter.get('/productClient',(req,res)=>{
+    res.render('productClient')
+  })
+  // ... otras rutas ...
+
+  viewsRouter.post('/delete-product/:id', async (req, res) => {
+    const productId = req.params.id;
+
+    try {
+      await manager.deleteProduct(productId);
+      res.json({ success: true }); // Devuelve una respuesta de éxito en formato JSON
+      io.emit('productDeleted', productId); // Emitir evento de socket.io para notificar que se eliminó un producto
+    } catch (error) {
+      console.log('Error al eliminar el producto:', error.message);
+      res.status(500).json({ error: 'Error al eliminar el producto' });
+    }
+  });
+
   return viewsRouter;
 };
-
-
-
+  

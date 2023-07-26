@@ -121,5 +121,16 @@
     "thumbnails": [
       "thumbnails-1690131679332-132675984.jpg"
     ]
+  },
+  {
+    "id": 27,
+    "title": "sdruu",
+    "description": "Jean femenino",
+    "code": "HUYT345",
+    "price": "3456",
+    "status": false,
+    "stock": 34,
+    "category": "Jeans",
+    "thumbnails": "C:\\Users\\Lenovo\\Desktop\\Pre entrega final\\src\\Public\\uploads\\thumbnails-1690341378381-240229270.jpg"
   }
 ]

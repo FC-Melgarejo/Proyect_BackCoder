@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { generateId } = require('./Helpers');
+const { generateId } = require('../src/helpers');
 
 class ProductManager {
   constructor(filePath) {
@@ -50,13 +50,14 @@ class ProductManager {
 
   loadProducts() {
     try {
-      const productsData = fs.readFileSync(this.filePath, 'utf8');
+      const productsData = fs.readFileSync('../products.json', 'utf8');
       this.products = JSON.parse(productsData);
       console.log('Productos cargados correctamente:', this.products);
     } catch (err) {
       console.error('Error al cargar los productos:', err);
     }
   }
+  
 
   saveProducts() {
     try {
@@ -71,24 +72,24 @@ class ProductManager {
   async deleteProduct(productId) {
     try {
       // Buscar el producto en los datos JSON y eliminarlo
-      const updatedProducts = products.filter((product) => product.id !== productId);
-
+      const updatedProducts = this.products.filter((product) => product.id !== productId);
+  
       // Guardar los productos actualizados de vuelta al archivo JSON
-      fs.writeFileSync('/json/file.json', JSON.stringify(updatedProducts, null, 2));
-
+      fs.writeFileSync(this.filePath, JSON.stringify(updatedProducts, null, 2));
+  
       // Eliminar el archivo de imagen asociado de la carpeta "uploads"
-      const product = products.find((product) => product.id === productId);
+      const product = this.products.find((product) => product.id === productId);
       if (product) {
-        fs.unlinkSync(`/uploads/folder/${product.thumbnails}`);
+        fs.unlinkSync(`/uploads/${product.thumbnails}`);
       }
-
+  
       // Devolver un resultado exitoso o lanzar un error si algo sale mal
       return true;
     } catch (error) {
       throw new Error('Error al eliminar el producto: ' + error.message);
     }
   }
-}
+}  
 
 module.exports = ProductManager; 
 

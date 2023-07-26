@@ -1,52 +1,53 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>My App</title>
-  
-  <link rel="stylesheet" href="/css/styles.css">
-
-
-</head>
-<body>
-  <h1>Catálogo de productos</h1>
-
+ <h1>Catálogo de productos</h1>
   <table>
-    <tr>
-      <th>Título</th>
-      <th>Descripción</th>
-      <th>Precio</th>
-      <th>Thumbnail</th>
-      <th>Código</th>
-    </tr>
-    {{#each products}}
-    <tr>
-      <td>{{this.title}}</td>
-      <td>{{this.description}}</td>
-      <td>{{this.price}}</td>
-      <td><img src="/uploads/{{this.thumbnails}}" alt="Thumbnail" style="width: 50px;"></td>
-      <td>{{this.code}}</td>
-      <td>
-        <button class="btn-delete" data-id="{{this.id}}">Eliminar</button>
-      </td>
-    </tr>
-    {{/each}}
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Título</th>
+        <th>Descripción</th>
+        <th>Código</th>
+        <th>Precio</th>
+        <th>Estado</th>
+        <th>Stock</th>
+        <th>Categoría</th>
+        <th>Imágen</th>
+        <th>Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each products}}
+      <tr>
+        <td>{{id}}</td>
+        <td>{{title}}</td>
+        <td>{{description}}</td>
+        <td>{{code}}</td>
+        <td>{{price}}</td>
+        <td>{{status}}</td>
+        <td>{{stock}}</td>
+        <td>{{category}}</td>
+        <td>
+          <div class="image-box">
+            <img class="product-image" src="/uploads/{{thumbnails}}" alt="{{title}}">
+          </div>
+        </td>
+        <td>
+        <form class="delete-product-form" action="/delete-product/{{id}}" method="POST">
+    <!-- Asegúrate de que el formulario tenga el atributo action correcto -->
+    <input type="hidden" name="_method" value="DELETE"> <!-- No es necesario si usas el método POST -->
+    <button class="delete-product-btn" data-product-id="{{id}}">Eliminar</button>
+  </form>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
   </table>
 
-</body>
-</html>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/productClient.js"></script>
+  <!-- Agregar aquí los enlaces a tus scripts si los tienes -->
 
 
-
-
-
-  
-
-
-
-  
-
-
+ 
 
 
 

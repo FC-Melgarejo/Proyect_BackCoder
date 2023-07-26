@@ -1,26 +1,29 @@
 const express = require('express');
 const productRouter = express.Router();
 const ProductManager = require('../../components/ProductManager');
-const { generateId } = require('../../components/Helpers');
-const multer = require('multer');
+const { generateId } = require('../helpers');
 const path = require('path');
+const multer = require('multer');
 
-const manager = new ProductManager('../productos.json');
+const manager = new ProductManager('../products.json');
 
-// Configuración de Multer para el almacenamiento de imágenes
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'public/uploads'); // Directorio donde se guardarán las imágenes
+    cb(null, 'public/uploads');
   },
   filename: (req, file, cb) => {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
     const extname = path.extname(file.originalname);
-    const filename = file.fieldname + '-' + uniqueSuffix + extname; // Nombre de archivo único para evitar colisiones
+    const filename = file.fieldname + '-' + uniqueSuffix + extname;
     cb(null, filename);
   }
 });
 
 const upload = multer({ storage });
+
+productRouter.get('/', (req, res) => {
+  res.send({ status: "success", payload: product });
+});
 
 // Obtener todos los productos
 productRouter.get('/', async (req, res) => {
@@ -54,71 +57,64 @@ productRouter.get('/:id', async (req, res) => {
   }
 });
 
-// Crear un nuevo producto
-productRouter.post("/", upload.array('thumbnails', 5), async (req, res) => {
-  try {
-    const { title, description, code, price, stock, category } = req.body;
+// Ruta para agregar un nuevo producto
+productRouter.post('/products', upload.single('thumbnails'), (req, res) => {
+  const productData = {
+    id: generateId(),
+    title: req.body.title,
+    description: req.body.description,
+    code: req.body.code,
+    price: req.body.price,
+    status: req.body.status === 'true',
+    stock: parseInt(req.body.stock),
+    category: req.body.category,
+    thumbnails: req.file ? req.file.path : null,
+  };
 
-    if (!title || !description || !price || !code || !stock || !category) {
-      return res.status(400).json({ error: 'Todos los campos son obligatorios' });
-    }
+  manager.addProduct(productData);
 
-    const thumbnails = req.files.map(file => file.filename);
+  // Emitir evento de socket.io para notificar que se agregó un producto
+  req.io.emit('productAdded', 'Nuevo producto agregado');
 
-    const newProduct = {
-      id: generateId(), // Aquí usamos la función generateId() para obtener un nuevo ID único.
-      title,
-      description,
-      code,
-      price,
-      status: true,
-      stock,
-      category,
-      thumbnails
-    };
-
-    await manager.addProduct(newProduct);
-
-    res.status(201).json({ message: 'Producto agregado exitosamente', product: newProduct });
-  } catch (error) {
-    res.status(500).json({ error: 'Error al agregar el producto' });
-  }
+  res.json(productData);
 });
 
-// Actualizar un producto por ID
-productRouter.put("/:id", async (req, res) => {
+// Ruta para eliminar un producto
+productRouter.delete('/products/:id', (req, res) => {
+  const productId = req.params.id;
   try {
-    const { id } = req.params;
-    const updatedProduct = req.body;
-
-    const success = await manager.updateProduct(id, updatedProduct);
-    if (success) {
-      res.json({ message: 'Producto actualizado exitosamente' });
-    } else {
-      res.status(404).json({ message: 'Producto no encontrado' });
-    }
-  } catch (error) {
-    res.status(500).json({ error: 'Error al actualizar el producto' });
-  }
-});
-
-// Eliminar un producto por ID
-productRouter.delete("/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-
-    const success = await manager.deleteProduct(id);
-    if (success) {
-      res.json({ message: 'Producto eliminado exitosamente' });
-    } else {
-      res.status(404).json({ message: 'Producto no encontrado' });
-    }
+    manager.deleteProduct(productId);
+    // Emitir evento de socket.io para notificar que se eliminó un producto
+    req.io.emit('productDeleted', productId);
+    res.json({ message: 'Producto eliminado exitosamente' });
   } catch (error) {
     res.status(500).json({ error: 'Error al eliminar el producto' });
   }
 });
 
-module.exports = productRouter;
+
+module.exports = (io) => {
+  // Agrega el middleware de Socket.IO antes de devolver el router
+  productRouter.use((req, res, next) => {
+    req.io = io;
+    next();
+  });
+
+  return productRouter;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
